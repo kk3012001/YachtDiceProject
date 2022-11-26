@@ -8,20 +8,39 @@ isGameplay = True
 #Iniciallize game
 class Init:
     def Start():
-        os.system('clear')
-        print("""
- _  _  __    ___  _  _  ____    ____  __  ___  ____ 
-( \/ )/ _\  / __)/ )( \(_  _)  (    \(  )/ __)(  __)
- )  //    \( (__ ) __ (  )(     ) D ( )(( (__  ) _) 
-(__/ \_/\_/ \___)\_)(_/ (__)   (____/(__)\___)(____)
-        """)
-        print("BY Jiwon Kang")
-        print(".")
-        print(".")
-        print(".")
-        print(".")
-        print(".")
-        input("Press Enter to continue...")
+        while isGameplay == True:
+            os.system('clear')
+            print("* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - *")
+            print("|                                                                                                     |")
+            print("|                                                                                                     |")
+            print("|                                                                                                     |")
+            print("|                                                                                                     |")
+            print("""|                                                                                                     |
+|                         _  _  __    ___  _  _  ____    ____  __  ___  ____                          |
+|                        ( \/ )/ _\  / __)/ )( \(_  _)  (    \(  )/ __)(  __)                         |
+|                         )  //    \( (__ ) __ (  )(     ) D ( )(( (__  ) _)                          |
+|                        (__/ \_/\_/ \___)\_)(_/ (__)   (____/(__)\___)(____)                         |
+|                                                                                                     |""")
+            print("|                                                                                                     |")
+            print("|                                                                                                     |")
+            print("|                                                                                                     |")
+            print("|                                                                                                     |")
+            print("|                                                                                                     |")
+            print("|                                         by Jiwon Kang                                               |")
+            print("|                                                                                                     |")
+            print("|                                                                                                     |")
+            print("|                                                                                                     |")
+            print("|                                                                                                     |")
+            print("|                                                                                                     |")
+            print("* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - *")
+            print("Press Enter to continue...")
+            userInput = input(">> ")
+            if userInput == "help":
+                sleep(0.5)
+                Main.Help()
+            else:
+                break
+            
 
     
 #Database
@@ -29,7 +48,33 @@ class Database :
     isPlayer1 = True
     player1Score = {"Aces" : "-", "Deuces" : "-", "Threes" : "-", "Fours" : "-", "Fives" : "-", "Sixes" : "-", "Bonus" : "-", "Choice" : "-", "Fullhouse" : "-", "FourofaKind" : "-", "S.Straight" : "-", "L.Straight" : "-", "Yacht" : "-" }
     player2Score = {"Aces" : "-", "Deuces" : "-", "Threes" : "-", "Fours" : "-", "Fives" : "-", "Sixes" : "-", "Bonus" : "-", "Choice" : "-", "Fullhouse" : "-", "FourofaKind" : "-", "S.Straight" : "-", "L.Straight" : "-", "Yacht" : "-" }
+    total1 = 0
+    total2 = 0
+    sumBonus1 = 0
+    sumBonus2 = 0
     
+    def Init():
+        Database.isPlayer1 = True
+        Database.player1Score = {"Aces" : "-", "Deuces" : "-", "Threes" : "-", "Fours" : "-", "Fives" : "-", "Sixes" : "-", "Bonus" : "-", "Choice" : "-", "Fullhouse" : "-", "FourofaKind" : "-", "S.Straight" : "-", "L.Straight" : "-", "Yacht" : "-" }
+        Database.player2Score = {"Aces" : "-", "Deuces" : "-", "Threes" : "-", "Fours" : "-", "Fives" : "-", "Sixes" : "-", "Bonus" : "-", "Choice" : "-", "Fullhouse" : "-", "FourofaKind" : "-", "S.Straight" : "-", "L.Straight" : "-", "Yacht" : "-" }
+        Database.total1 = 0
+        Database.total2 = 0
+        Database.sumBonus1 = 0
+        Database.sumBonus2 = 0
+    
+    def Sum(playerDatabase, result):
+        if playerDatabase == Database.player1Score:
+            Database.total1 = Database.total1 + result
+        elif playerDatabase == Database.player2Score:
+            Database.total2 = Database.total2 + result
+    
+    def BonusSum(playerDatabase, result):
+        if playerDatabase == Database.player1Score:
+            Database.sumBonus1 = Database.sumBonus1 + result
+        elif playerDatabase == Database.player2Score:
+            Database.sumBonus2 = Database.sumBonus2 + result
+            
+        
 
 class Dice :
     rollChances = 3
@@ -104,52 +149,38 @@ class Dice :
                 fixGraphic[i] = " "
         
         print(f"""
-           Dice 1        Dice 2        Dice 3        Dice 4        Dice 5     
-        * - - - - *   * - - - - *   * - - - - *   * - - - - *   * - - - - *  
-        |  {diceGraphic0[0][0]}   {diceGraphic0[0][1]}  |   |  {diceGraphic1[0][0]}   {diceGraphic1[0][1]}  |   |  {diceGraphic2[0][0]}   {diceGraphic2[0][1]}  |   |  {diceGraphic3[0][0]}   {diceGraphic3[0][1]}  |   |  {diceGraphic4[0][0]}   {diceGraphic4[0][1]}  |   
-        |  {diceGraphic0[1][0]} {diceGraphic0[1][1]} {diceGraphic0[1][2]}  |   |  {diceGraphic1[1][0]} {diceGraphic1[1][1]} {diceGraphic1[1][2]}  |   |  {diceGraphic2[1][0]} {diceGraphic2[1][1]} {diceGraphic2[1][2]}  |   |  {diceGraphic3[1][0]} {diceGraphic3[1][1]} {diceGraphic3[1][2]}  |   |  {diceGraphic4[1][0]} {diceGraphic4[1][1]} {diceGraphic4[1][2]}  |   
-        |  {diceGraphic0[2][0]}   {diceGraphic0[2][1]}  |   |  {diceGraphic1[2][0]}   {diceGraphic1[2][1]}  |   |  {diceGraphic2[2][0]}   {diceGraphic2[2][1]}  |   |  {diceGraphic3[2][0]}   {diceGraphic3[2][1]}  |   |  {diceGraphic4[2][0]}   {diceGraphic4[2][1]}  |   
-        * - - - - *   * - - - - *   * - - - - *   * - - - - *   * - - - - *  
-   Fix  :    {fixGraphic[0]}             {fixGraphic[1]}             {fixGraphic[2]}             {fixGraphic[3]}             {fixGraphic[4]}
+                Dice 1        Dice 2        Dice 3        Dice 4        Dice 5     
+             * - - - - *   * - - - - *   * - - - - *   * - - - - *   * - - - - *  
+             |  {diceGraphic0[0][0]}   {diceGraphic0[0][1]}  |   |  {diceGraphic1[0][0]}   {diceGraphic1[0][1]}  |   |  {diceGraphic2[0][0]}   {diceGraphic2[0][1]}  |   |  {diceGraphic3[0][0]}   {diceGraphic3[0][1]}  |   |  {diceGraphic4[0][0]}   {diceGraphic4[0][1]}  |   
+             |  {diceGraphic0[1][0]} {diceGraphic0[1][1]} {diceGraphic0[1][2]}  |   |  {diceGraphic1[1][0]} {diceGraphic1[1][1]} {diceGraphic1[1][2]}  |   |  {diceGraphic2[1][0]} {diceGraphic2[1][1]} {diceGraphic2[1][2]}  |   |  {diceGraphic3[1][0]} {diceGraphic3[1][1]} {diceGraphic3[1][2]}  |   |  {diceGraphic4[1][0]} {diceGraphic4[1][1]} {diceGraphic4[1][2]}  |   
+             |  {diceGraphic0[2][0]}   {diceGraphic0[2][1]}  |   |  {diceGraphic1[2][0]}   {diceGraphic1[2][1]}  |   |  {diceGraphic2[2][0]}   {diceGraphic2[2][1]}  |   |  {diceGraphic3[2][0]}   {diceGraphic3[2][1]}  |   |  {diceGraphic4[2][0]}   {diceGraphic4[2][1]}  |   
+             * - - - - *   * - - - - *   * - - - - *   * - - - - *   * - - - - *  
+        Fix  :    {fixGraphic[0]}             {fixGraphic[1]}             {fixGraphic[2]}             {fixGraphic[3]}             {fixGraphic[4]}
     """)
-        print("Reroll : ", Dice.rollChances)
+        print("                                         Reroll : ", Dice.rollChances)
+        print("")
             
         
 #PrintScoreboard
 class Scoreboard :
-    
-    player1Total = Database.player1Score.values()
-    player2Total = Database.player2Score.values()
-
-    
     def PrintScore() :
-        total1 = 0
-        total2 = 0
-        
-        for i in range(0, len(Scoreboard.player1Total)):
-            if i == int:
-                total1 = total1 + i
-        for i in range(0, len(Scoreboard.player2Total)):
-            if i == int:
-                total2 = total2 + i
-            
         os.system('clear')
         print(f"""
 * SCORE BOARD
 || Player 1 ||
-||  Aces : {Database.player1Score['Aces']}  | Deuces : {Database.player1Score["Deuces"]} | Threes : {Database.player1Score['Threes']} | Fours : {Database.player1Score["Fours"]} | Fives : {Database.player1Score["Fives"]} | Sixes : {Database.player1Score['Sixes']} | Bonus : {Database.player1Score['Bonus']} ||
+||  Aces : {Database.player1Score['Aces']}  | Deuces : {Database.player1Score["Deuces"]} | Threes : {Database.player1Score['Threes']} | Fours : {Database.player1Score["Fours"]} | Fives : {Database.player1Score["Fives"]} | Sixes : {Database.player1Score['Sixes']} | {} / 63 Bonus : {Database.player1Score['Bonus']} ||
 || Choice : {Database.player1Score['Choice']} | Fullhouse : {Database.player1Score['Fullhouse']} | Four of a Kind : {Database.player1Score['FourofaKind']} | S.Staright : {Database.player1Score['S.Straight']} | L.Straight : {Database.player1Score['L.Straight']} | Yacht : {Database.player1Score['Yacht']} ||
-|| Total : {total1} ||
+|| Total : {Database.total1} ||
 
 || Player 2 ||
-||  Aces :  {Database.player2Score['Aces']} | Deuces : {Database.player2Score["Deuces"]} | Threes : {Database.player2Score['Threes']} | Fours : {Database.player2Score["Fours"]} | Fives : {Database.player2Score["Fives"]} | Sixes : {Database.player2Score['Sixes']} | Bonus : {Database.player2Score['Bonus']} ||
+||  Aces :  {Database.player2Score['Aces']} | Deuces : {Database.player2Score["Deuces"]} | Threes : {Database.player2Score['Threes']} | Fours : {Database.player2Score["Fours"]} | Fives : {Database.player2Score["Fives"]} | Sixes : {Database.player2Score['Sixes']} | {}/ 63 Bonus : {Database.player2Score['Bonus']} ||
 || Choice : {Database.player2Score['Choice']} | Fullhouse : {Database.player2Score['Fullhouse']} | Four of a Kind : {Database.player2Score['FourofaKind']} | S.Staright : {Database.player2Score['S.Straight']} | L.Straight : {Database.player2Score['L.Straight']} | Yacht : {Database.player2Score['Yacht']} ||
-|| Total : {total2} ||
+|| Total : {Database.total2} ||
 """)
         if Database.isPlayer1 == True:
-            print("** Player 1 Turn **")
+            print("                                     ** Player 1 Turn **")
         elif Database.isPlayer1 == False:
-            print("** Player 2 Turn **")
+            print("                                     ** Player 2 Turn **")
 
             
 class PlayerAction:
@@ -176,6 +207,8 @@ class PlayerAction:
             playerDB = Database.player2Score
             
         while True:
+            Scoreboard.PrintScore()
+            Dice.PrintDiceInterface()
             print("Select the Score")
             print("Aces : 1 | Deuces : 2 | Threes : 3 | Fours : 4 | Fives : 5 | Sixes : 6 || Back : Anything")
             print("Choices : q | Fullhouse : w |  Four of a Kind : e | S.Straight : r | L.Straight : t | Yacht : y")
@@ -304,7 +337,7 @@ class PlayerAction:
                 print("You Can Score Yacht!")
                 
             print("Choose Your Action...")
-            print("fix : 1 | reroll : 2 | score : 3 |")
+            print("fix : 1 | reroll : 2 | score : 3 | or help")
             userInput = input(">> ")
             if userInput == "1" :
                 PlayerAction.Fix()
@@ -312,7 +345,7 @@ class PlayerAction:
                 Dice.PrintDiceInterface()
             elif userInput == "2":
                 if Dice.rollChances == 0:
-                    print("You spended all of your Reroll chances!")
+                    print("You spended all of Reroll chances!")
                     sleep(0.5)
                     continue
                 else:
@@ -325,6 +358,9 @@ class PlayerAction:
                     break
                 else:
                     continue
+            elif userInput == "help":
+                Main.Help()
+                continue
                 
             else:
                 print("ERROR!")
@@ -406,6 +442,9 @@ class Score:
             if Dice.rolledDice[i] == 1:
                 result = result + 1
         PlayerDatabase["Aces"] = result
+        Database.Sum(PlayerDatabase,result)
+        Database.BonusSum(PlayerDatabase,result)
+        Score.BonusCheck(PlayerDatabase)
         Dice.rollChances = 0
         PlayerAction.scored = True
         
@@ -415,6 +454,9 @@ class Score:
             if Dice.rolledDice[i] == 2:
                 result = result + 2
         PlayerDatabase["Deuces"] = result
+        Database.Sum(PlayerDatabase,result)
+        Database.BonusSum(PlayerDatabase,result)
+        Score.BonusCheck(PlayerDatabase)
         Dice.rollChances = 0
         PlayerAction.scored = True
         
@@ -424,6 +466,9 @@ class Score:
             if Dice.rolledDice[i] == 3:
                 result = result + 3
         PlayerDatabase["Threes"] = result
+        Database.Sum(PlayerDatabase,result)
+        Database.BonusSum(PlayerDatabase,result)
+        Score.BonusCheck(PlayerDatabase)
         Dice.rollChances = 0
         PlayerAction.scored = True
 
@@ -433,6 +478,9 @@ class Score:
             if Dice.rolledDice[i] == 4:
                 result = result + 4
         PlayerDatabase["Fours"] = result
+        Database.Sum(PlayerDatabase,result)
+        Database.BonusSum(PlayerDatabase,result)
+        Score.BonusCheck(PlayerDatabase)
         Dice.rollChances = 0
         PlayerAction.scored = True
         
@@ -442,6 +490,9 @@ class Score:
             if Dice.rolledDice[i] == 5:
                 result = result + 5
         PlayerDatabase["Fives"] = result
+        Database.Sum(PlayerDatabase,result)
+        Database.BonusSum(PlayerDatabase,result)
+        Score.BonusCheck(PlayerDatabase)
         Dice.rollChances = 0
         PlayerAction.scored = True
     
@@ -451,18 +502,27 @@ class Score:
             if Dice.rolledDice[i] == 6:
                 result = result + 6
         PlayerDatabase["Sixes"] = result
+        Database.Sum(PlayerDatabase,result)
+        Database.BonusSum(PlayerDatabase,result)
+        Score.BonusCheck(PlayerDatabase)
         Dice.rollChances = 0
         PlayerAction.scored = True
         
-    def BonusCheck(PlayerScore):
-        if PlayerScore["Aces"] + PlayerScore["Deuces"] + PlayerScore["Threes"] + PlayerScore["Fours"] + PlayerScore["Fives"] + PlayerScore["Sixes"] >= 63:
-            PlayerScore["Bonus"] = 35
+    def BonusCheck(playerDatabase):
+        if playerDatabase == Database.player1Score:
+            if Database.sumBonus1 >= 63:
+                playerDatabase["Bonus"] = 35
+        elif playerDatabase == Database.player2Score:
+            if Database.sumBonus2 >= 63:
+                playerDatabase["Bonus"] = 35
+
 
     def Choice(PlayerDatabase):
         result = 0
         for i in range(0, 5):
             result = result + Dice.rolledDice[i]
-        PlayerDatabase["Choices"] = result
+        PlayerDatabase["Choice"] = result
+        Database.Sum(PlayerDatabase,result)
         Dice.rollChances = 0
         PlayerAction.scored = True
 
@@ -472,6 +532,7 @@ class Score:
             for i in range(0, 5):
                 result = result + Dice.rolledDice[i]
             PlayerDatabase["Fullhouse"] = result
+            Database.Sum(PlayerDatabase,result)
         else:
             PlayerDatabase["Fullhouse"] = 0
         Dice.rollChances = 0
@@ -483,6 +544,7 @@ class Score:
             for i in range(0, 5):
                 result = result + Dice.rolledDice[i]
             PlayerDatabase["FourofaKind"] = result
+            Database.Sum(PlayerDatabase,result)
         else:
             PlayerDatabase["FourofaKind"] = 0
         Dice.rollChances = 0
@@ -491,6 +553,7 @@ class Score:
     def SStraight(PlayerDatabase):
         if Checker.CanSStraight == True:
             PlayerDatabase["S.Straight"] = 15
+            Database.Sum(PlayerDatabase, 15)
         else:
             PlayerDatabase["S.Straight"] = 0
         Dice.rollChances = 0
@@ -499,6 +562,7 @@ class Score:
     def LStraight(PlayerDatabase):
         if Checker.CanLStraight == True:
             PlayerDatabase["L.Straight"] = 30
+            Database.Sum(PlayerDatabase, 30)
         else:
             PlayerDatabase["L.Straight"] = 0
         Dice.rollChances = 0
@@ -507,6 +571,7 @@ class Score:
     def Yacht(PlayerDatabase):
         if Checker.CanYacht == True:
             PlayerDatabase["Yacht"] = 50
+            Database.Sum(PlayerDatabase, 50)
         else:
             PlayerDatabase["Yacht"] = 0
         Dice.rollChances = 0
@@ -515,29 +580,102 @@ class Score:
         
         
 class Main:
-    def Cycle():
-        while PlayerAction.scored == False:
-            Scoreboard.PrintScore()
-            if Dice.rollChances == 3:
-                Dice.FirstRoll()
-                Checker.End()
-                Checker.All()
-            else:
-                Dice.Reroll()
-                Checker.End()
-                Checker.All()
-                
-            Dice.PrintDiceInterface()
-            PlayerAction.UserInput()
-        Scoreboard.PrintScore()
-        Dice.PrintDiceInterface()
-        PlayerAction.EndTurn()
-        print("Press Enter to continue...")
+    def Help():
+        print("""
+                  
+1. 주사위 5개를 던진다.
+2. 이 중 원하는 주사위들은 남겨두고, 나머지 주사위들을 다시 던진다. 다시 던지기는 한 라운드에 2번까지(즉, 한 라운드에 최대 3번까지 던질 수 있다.) 가능하며, 앞에서 던지지 않았던 주사위도 원한다면 다시 던질 수 있다.
+3. 주사위 던지기가 끝난 후 나온 최종 조합으로, 아래 제시된 족보 중 아직까지 기록되지 않은 하나를 반드시 선택하여, 점수판에 해당 족보의 점수를 규칙에 맞게 기록해야 한다.
+4. 기록되지 않은 족보 중에서 만족하는 족보가 없거나, 있더라도 점수 기대값이 마음에 들지 않는 등의 사유로, 만족하지 않는 족보를 선택하는 경우, 선택한 족보의 점수칸에 0점으로 기록해야 한다.
+5. 모든 플레이어가 점수판을 모두 채우면 게임이 끝난다. 점수판에 기록한 점수 총합이 가장 높은 사람이 승리하며, 순위를 가릴 경우 점수 총합이 높은 순서대로 순위를 결정한다.
+
+Aces : 1이 나온 주사위 눈의 총합. 최대 5점.
+Deuces : 2가 나온 주사위 눈의 총합. 최대 10점.
+Threes : 3이 나온 주사위 눈의 총합. 최대 15점.
+Fours : 4가 나온 주사위 눈의 총합. 최대 20점.
+Fives : 5가 나온 주사위 눈의 총합. 최대 25점.
+Sixes : 6이 나온 주사위 눈의 총합. 최대 30점.
+보너스 : 상단 항목의 점수 합계가 63점 이상일 때, 35점을 추가로 얻는다.
+
+Choice : 주사위 눈 5개의 총합. 최대 30점.
+4 of a Kind : 동일한 주사위 눈이 4개 이상일 때, 주사위 눈 5개의 총합. 최대 30점.
+Full House : 주사위를 3개, 2개로 묶었을 때 각각의 묶음 안에서 주사위 눈이 서로 동일할 때, 주사위 눈 5개의 총합. 최대 30점.
+Small Straight : 이어지는 주사위 눈이 4개 이상일 때. 고정 15점.
+Large Straight : 이어지는 주사위 눈이 5개일 때. 고정 30점.
+Yacht : 동일한 주사위 눈이 5개일 때. 고정 50점.
+
+                 """)
+        print("Enter to Continue..")
         input(">> ")
-        PlayerAction.scored = False
+            
+    
+    def Cycle():
+        for i in range(0,2):
+            while PlayerAction.scored == False:
+                Scoreboard.PrintScore()
+                if Dice.rollChances == 3:
+                    Dice.FirstRoll()
+                    Checker.End()
+                    Checker.All()
+                else:
+                    Dice.Reroll()
+                    Checker.End()
+                    Checker.All()
+                    
+                Dice.PrintDiceInterface()
+                PlayerAction.UserInput()
+            Scoreboard.PrintScore()
+            Dice.PrintDiceInterface()
+            PlayerAction.EndTurn()
+            print("Press Enter to continue...")
+            input(">> ")
+            PlayerAction.scored = False
+            
+    def CompareScore():
+        Scoreboard.PrintScore()
+        if Database.total1 > Database.total2:
+            print("")
+            print("")
+            print("""
+  ____  _                         _  __        ___       
+ |  _ \| | __ _ _   _  ___ _ __  / | \ \      / (_)_ __  
+ | |_) | |/ _` | | | |/ _ \ '__| | |  \ \ /\ / /| | '_ \ 
+ |  __/| | (_| | |_| |  __/ |    | |   \ V  V / | | | | |
+ |_|   |_|\__,_|\__, |\___|_|    |_|    \_/\_/  |_|_| |_|
+                |___/                                         
+                  """)
+        elif Database.total1< Database.total2:
+            print("""
+  ____  _                         ____   __        ___       
+ |  _ \| | __ _ _   _  ___ _ __  |___ \  \ \      / (_)_ __  
+ | |_) | |/ _` | | | |/ _ \ '__|   __) |  \ \ /\ / /| | '_ \ 
+ |  __/| | (_| | |_| |  __/ |     / __/    \ V  V / | | | | |
+ |_|   |_|\__,_|\__, |\___|_|    |_____|    \_/\_/  |_|_| |_|
+                |___/                                                       
+                  """)
+        else:
+            print("""
+  ____                           
+ |  _ \ _ __ __ ___      __      
+ | | | | '__/ _` \ \ /\ / /      
+ | |_| | | | (_| |\ V  V / _ _ _ 
+ |____/|_|  \__,_| \_/\_(_|_|_|_)
+                                                   
+                  """)
+
+
+        
         
 
 while isGameplay == True:
     Init.Start()
-    for i in range(0, 26):
+    Database.Init()
+    for i in range(0, 12):
         Main.Cycle()
+    Main.CompareScore()
+    print("| Replay : r | | Exit : Anithing |")
+    rePlay = input(">> ")
+    if rePlay == "R":
+        continue
+    else:
+        break
