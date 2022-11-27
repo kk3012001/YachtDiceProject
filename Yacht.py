@@ -168,12 +168,12 @@ class Scoreboard :
         print(f"""
 * SCORE BOARD
 || Player 1 ||
-||  Aces : {Database.player1Score['Aces']}  | Deuces : {Database.player1Score["Deuces"]} | Threes : {Database.player1Score['Threes']} | Fours : {Database.player1Score["Fours"]} | Fives : {Database.player1Score["Fives"]} | Sixes : {Database.player1Score['Sixes']} | {} / 63 Bonus : {Database.player1Score['Bonus']} ||
+||  Aces : {Database.player1Score['Aces']}  | Deuces : {Database.player1Score["Deuces"]} | Threes : {Database.player1Score['Threes']} | Fours : {Database.player1Score["Fours"]} | Fives : {Database.player1Score["Fives"]} | Sixes : {Database.player1Score['Sixes']} | {Database.sumBonus1} / 63 Bonus : {Database.player1Score['Bonus']} ||
 || Choice : {Database.player1Score['Choice']} | Fullhouse : {Database.player1Score['Fullhouse']} | Four of a Kind : {Database.player1Score['FourofaKind']} | S.Staright : {Database.player1Score['S.Straight']} | L.Straight : {Database.player1Score['L.Straight']} | Yacht : {Database.player1Score['Yacht']} ||
 || Total : {Database.total1} ||
 
 || Player 2 ||
-||  Aces :  {Database.player2Score['Aces']} | Deuces : {Database.player2Score["Deuces"]} | Threes : {Database.player2Score['Threes']} | Fours : {Database.player2Score["Fours"]} | Fives : {Database.player2Score["Fives"]} | Sixes : {Database.player2Score['Sixes']} | {}/ 63 Bonus : {Database.player2Score['Bonus']} ||
+||  Aces :  {Database.player2Score['Aces']} | Deuces : {Database.player2Score["Deuces"]} | Threes : {Database.player2Score['Threes']} | Fours : {Database.player2Score["Fours"]} | Fives : {Database.player2Score["Fives"]} | Sixes : {Database.player2Score['Sixes']} | {Database.sumBonus2}/ 63 Bonus : {Database.player2Score['Bonus']} ||
 || Choice : {Database.player2Score['Choice']} | Fullhouse : {Database.player2Score['Fullhouse']} | Four of a Kind : {Database.player2Score['FourofaKind']} | S.Staright : {Database.player2Score['S.Straight']} | L.Straight : {Database.player2Score['L.Straight']} | Yacht : {Database.player2Score['Yacht']} ||
 || Total : {Database.total2} ||
 """)
@@ -189,8 +189,7 @@ class PlayerAction:
         print("Select Dice to Fix or Unfix | Cancel : Anything")
         while True:
             userInput = input(">> ")
-            userInput = int(userInput)
-            if userInput == "1" or "2" or "3" or "4" or "5":
+            if userInput in ["1", "2", "3", "4", "5"]:
                 if Dice.rerollList[int(userInput) - 1] == 0:
                   Dice.rerollList[int(userInput) - 1] = 1
                   break
