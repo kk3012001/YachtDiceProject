@@ -398,18 +398,22 @@ class Checker:
     
     
     def Fullhouse():
-        for i in range(1,7):            
+        tempTriple = []
+        for i in range(1,7):
             if Dice.rolledDice.count(i) == 3:
                 Checker.triple = True
+                tempTriple.append(i)
             else:
                 Checker.triple = False
-        if Checker.triple == True:
-            for i in (1, 7):
-                if Dice.rolledDice.count(i) == 2:
-                    Checker.CanFullhouse = True
-                    Checker.triple = False
-        else:
-            Checker.CanFullhouse = False
+            if Checker.triple == True:
+                for j in (1, 7):
+                    if j not in tempTriple:
+                        if Dice.rolledDice.count(j) == 2:
+                            Checker.CanFullhouse = True
+                            Checker.triple = False
+                            break
+                        else:
+                            Checker.CanFullhouse = False
             
     
     def FourofaKind():
