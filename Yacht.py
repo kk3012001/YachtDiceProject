@@ -31,7 +31,7 @@ class Init:
             print("|                                                                                                     |")
             print("|                                                                                                     |")
             print("|                                                                                                     |")
-            print("|                                                                                                     |")
+            print("| Set window size at least 110 * 40                                                                   |")
             print("* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - *")
             print("Press Enter to continue...")
             userInput = input(">> ")
@@ -155,7 +155,7 @@ class Dice :
              |  {diceGraphic0[1][0]} {diceGraphic0[1][1]} {diceGraphic0[1][2]}  |   |  {diceGraphic1[1][0]} {diceGraphic1[1][1]} {diceGraphic1[1][2]}  |   |  {diceGraphic2[1][0]} {diceGraphic2[1][1]} {diceGraphic2[1][2]}  |   |  {diceGraphic3[1][0]} {diceGraphic3[1][1]} {diceGraphic3[1][2]}  |   |  {diceGraphic4[1][0]} {diceGraphic4[1][1]} {diceGraphic4[1][2]}  |   
              |  {diceGraphic0[2][0]}   {diceGraphic0[2][1]}  |   |  {diceGraphic1[2][0]}   {diceGraphic1[2][1]}  |   |  {diceGraphic2[2][0]}   {diceGraphic2[2][1]}  |   |  {diceGraphic3[2][0]}   {diceGraphic3[2][1]}  |   |  {diceGraphic4[2][0]}   {diceGraphic4[2][1]}  |   
              * - - - - *   * - - - - *   * - - - - *   * - - - - *   * - - - - *  
-        Fix  :    {fixGraphic[0]}             {fixGraphic[1]}             {fixGraphic[2]}             {fixGraphic[3]}             {fixGraphic[4]}
+       Fix  :     {fixGraphic[0]}             {fixGraphic[1]}             {fixGraphic[2]}             {fixGraphic[3]}             {fixGraphic[4]}
     """)
         print("                                         Reroll : ", Dice.rollChances)
         print("")
@@ -215,6 +215,7 @@ class PlayerAction:
             if userInput == "1":
                 if playerDB["Aces"] != "-":
                     print("You aleady selected that score.")
+                    sleep(1)
                     continue
                 else:
                     pass
@@ -224,6 +225,7 @@ class PlayerAction:
             elif userInput == "2":
                 if playerDB["Deuces"] != "-":
                     print("You aleady selected that score.")
+                    sleep(1)
                     continue
                 else:
                     pass
@@ -233,6 +235,7 @@ class PlayerAction:
             elif userInput == "3":
                 if playerDB["Threes"] != "-":
                     print("You aleady selected that score.")
+                    sleep(1)
                     continue
                 else:
                     pass
@@ -242,6 +245,7 @@ class PlayerAction:
             elif userInput == "4":
                 if playerDB["Fours"] != "-":
                     print("You aleady selected that score.")
+                    sleep(1)
                     continue
                 else:
                     pass
@@ -251,6 +255,7 @@ class PlayerAction:
             elif userInput == "5":
                 if playerDB["Fives"] != "-":
                     print("You aleady selected that score.")
+                    sleep(1)
                     continue
                 else:
                     pass
@@ -260,6 +265,7 @@ class PlayerAction:
             elif userInput == "6":
                 if playerDB["Sixes"] != "-":
                     print("You aleady selected that score.")
+                    sleep(1)
                     continue
                 else:
                     pass
@@ -269,6 +275,7 @@ class PlayerAction:
             elif userInput == "q":
                 if playerDB["Choice"] != "-":
                     print("You aleady selected that score.")
+                    sleep(1)
                     continue
                 else:
                     pass
@@ -278,6 +285,7 @@ class PlayerAction:
             elif userInput == "w":
                 if playerDB["Fullhouse"] != "-":
                     print("You aleady selected that score.")
+                    sleep(1)
                     continue
                 else:
                     pass
@@ -287,6 +295,7 @@ class PlayerAction:
             elif userInput == "e":
                 if playerDB["FourofaKind"] != "-":
                     print("You aleady selected that score.")
+                    sleep(1)
                     continue
                 else:
                     pass
@@ -296,6 +305,7 @@ class PlayerAction:
             elif userInput == "r":
                 if playerDB["S.Straight"] != "-":
                     print("You aleady selected that score.")
+                    sleep(1)
                     continue
                 else:
                     pass
@@ -305,6 +315,7 @@ class PlayerAction:
             elif userInput == "t":
                 if playerDB["L.Straight"] != "-":
                     print("You aleady selected that score.")
+                    sleep(1)
                     continue
                 else:
                     pass
@@ -314,6 +325,7 @@ class PlayerAction:
             elif userInput == "y":
                 if playerDB["Yacht"] != "-":
                     print("You aleady selected that score.")
+                    sleep(1)
                     continue
                 Score.Yacht(playerDB)
                 break
@@ -674,7 +686,7 @@ while isGameplay == True:
     Main.CompareScore()
     print("| Replay : r | | Exit : Anithing |")
     rePlay = input(">> ")
-    if rePlay == "R":
+    if rePlay == "r" or "R":
         continue
     else:
-        break
+        isGameplay = False
