@@ -75,7 +75,7 @@ class Database :
             Database.sumBonus2 = Database.sumBonus2 + result
             
         
-
+#Dice Roll and Graphic
 class Dice :
     rollChances = 3
     diceDot = []
@@ -183,6 +183,7 @@ class Scoreboard :
             print("                                     ** Player 2 Turn **")
 
             
+#Main action of players
 class PlayerAction:
     scored = False
     def Fix():
@@ -388,6 +389,7 @@ class PlayerAction:
         Dice.rollChances = 3
 
 
+#Check player can score
 class Checker:
     CanFullhouse = False
     CanFourofaKind = False
@@ -449,6 +451,8 @@ class Checker:
         Checker.LStraight()
         Checker.Yacht()
 
+
+#Score Algorithm
 class Score:
 
     def Aces(PlayerDatabase):
@@ -593,7 +597,8 @@ class Score:
         PlayerAction.scored = True
             
         
-        
+
+#Main Cycle
 class Main:
     def Help():
         print("""
@@ -681,7 +686,7 @@ Yacht : 동일한 주사위 눈이 5개일 때. 고정 50점.
 
         
         
-
+#Running Game
 while isGameplay == True:
     Init.Start()
     Database.Init()
