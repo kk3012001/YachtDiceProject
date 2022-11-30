@@ -158,8 +158,7 @@ class Scoreboard :
 || Player {playerNumber} ||
 ||  Aces : {playerScore['Aces']}  | Deuces : {playerScore["Deuces"]} | Threes : {playerScore['Threes']} | Fours : {playerScore["Fours"]} | Fives : {playerScore["Fives"]} | Sixes : {playerScore['Sixes']} | {sumBonus} / 63 Bonus : {playerScore['Bonus']} ||
 || Choice : {playerScore['Choice']} | Fullhouse : {playerScore['Fullhouse']} | Four of a Kind : {playerScore['FourofaKind']} | S.Staright : {playerScore['S.Straight']} | L.Straight : {playerScore['L.Straight']} | Yacht : {playerScore['Yacht']} ||
-|| Total : {total} ||
-""")
+|| Total : {total} ||""")
     
     def PlayerNow(playerNumber):
         if playerNumber == 1:
@@ -205,7 +204,7 @@ class PlayerAction:
                 PlayerAction.Fix()
             elif userInput == "2":
                 if Dice.rollChances == 0:
-                    print("You spended all of Reroll chances!")
+                    print("You spent all of Reroll chances!")
                     sleep(0.5)
                     continue
                 else:
