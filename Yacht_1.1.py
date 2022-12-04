@@ -55,13 +55,11 @@ class Database :
         self.sumBonus = 0
         self.playerNumber = playerNumber
     
-    def Sum(self, result) -> int:
+    def Sum(self, result):
         self.total += result
-        return self.total
     
-    def BonusSum(self, result) -> int:
+    def BonusSum(self, result):
         self.sumBonus += result
-        return self.sumBonus
     
 
 #Dice Roll and Graphic
@@ -83,7 +81,7 @@ class Dice :
     def FirstRoll():
         Dice.Init()
         for i in range(0, 5):
-            tempDice = random.randrange(1, 6)
+            tempDice = random.randrange(1, 7)
             Dice.rolledDice.append(tempDice)
         Dice.rollChances =  Dice.rollChances - 1
     
@@ -92,7 +90,7 @@ class Dice :
             if Dice.rerollList[i] == 0:
                 pass
             elif Dice.rerollList[i] == 1:
-                Dice.rolledDice[i] = random.randrange(1,6)
+                Dice.rolledDice[i] = random.randrange(1, 7)
         Dice.rollChances = Dice.rollChances - 1
                 
     def SetDot(dot):
@@ -157,23 +155,25 @@ class Scoreboard :
         print(f"""
 || Player {playerNumber} ||
 ||  Aces : {playerScore['Aces']}  | Deuces : {playerScore["Deuces"]} | Threes : {playerScore['Threes']} | Fours : {playerScore["Fours"]} | Fives : {playerScore["Fives"]} | Sixes : {playerScore['Sixes']} | {sumBonus} / 63 Bonus : {playerScore['Bonus']} ||
-|| Choice : {playerScore['Choice']} | Fullhouse : {playerScore['Fullhouse']} | Four of a Kind : {playerScore['FourofaKind']} | S.Staright : {playerScore['S.Straight']} | L.Straight : {playerScore['L.Straight']} | Yacht : {playerScore['Yacht']} ||
+|| Choice : {playerScore['Choice']} | Fullhouse : {playerScore['Fullhouse']} | Four of a Kind : {playerScore['FourofaKind']} | S.Straight : {playerScore['S.Straight']} | L.Straight : {playerScore['L.Straight']} | Yacht : {playerScore['Yacht']} ||
 || Total : {total} ||""")
     
-    def PlayerNow(playerNumber):
-        if playerNumber == 1:
+    def PlayerNow(playerNow):
+        print("")
+        if playerNow == player1:
             print("                                     ** Player 1 Turn **")
-        elif playerNumber == 2:
+        elif playerNow == player2:
             print("                                     ** Player 2 Turn **")
             
     def PrintAllScore(player1, player2):
         Scoreboard.PlayerScore(player1, player1.playerNumber, player1.playerScore, player1.total, player1.sumBonus)
         Scoreboard.PlayerScore(player2, player2.playerNumber, player2.playerScore, player2.total, player2.sumBonus)
         
-    def ClearandPrintAllInterface(player1, player2):
+    def ClearandPrintAllInterface(player1, player2, playerNow):
         os.system('clear')
         print("* SCORE BOARD")
         Scoreboard.PrintAllScore(player1, player2)
+        Scoreboard.PlayerNow(playerNow)
         Dice.PrintDiceInterface()
 
 
@@ -185,7 +185,7 @@ class PlayerAction:
     def UserInput(playerDB, player1, player2):
         
         while True:
-            Scoreboard.ClearandPrintAllInterface(player1, player2)
+            Scoreboard.ClearandPrintAllInterface(player1, player2, playerNow)
             if Checker.CanFullhouse == True:
                 print("You Can Score Fullhouse!")
             if Checker.CanFourofaKind == True:
@@ -382,21 +382,23 @@ class Checker:
     def Fullhouse():
         tempTriple = []
         for i in range(1,7):
+            
             if Dice.rolledDice.count(i) == 3:
                 Checker.triple = True
                 tempTriple.append(i)
             else:
                 Checker.triple = False
-            if Checker.triple == True:
-                for j in (1, 7):
-                    if j not in tempTriple:
-                        if Dice.rolledDice.count(j) == 2:
-                            Checker.CanFullhouse = True
-                            Checker.triple = False
-                            break
-                        else:
-                            Checker.CanFullhouse = False
-            
+                
+        if Checker.triple == True:
+            for j in (1, 7):
+                if j not in tempTriple:
+                    if Dice.rolledDice.count(j) == 2:
+                        Checker.CanFullhouse = True
+                        Checker.triple = False
+                        break
+                    else:
+                        Checker.CanFullhouse = False
+        
     
     def FourofaKind():
         for i in range(1,7):
@@ -510,6 +512,7 @@ class Score:
     def BonusCheck(playerDB):
         if playerDB.sumBonus >= 63:
             playerDB.playerScore['Bonus'] = 35
+            playerDB.Sum(35)
 
 
     def Choice(PlayerDB):
@@ -548,7 +551,7 @@ class Score:
     def SStraight(PlayerDB):
         if Checker.CanSStraight == True:
             PlayerDB.playerScore["S.Straight"] = 15
-            PlayerDB.Sum(PlayerDB, 15)
+            PlayerDB.Sum(15)
         else:
             PlayerDB.playerScore["S.Straight"] = 0
         Dice.rollChances = 0
@@ -557,7 +560,7 @@ class Score:
     def LStraight(PlayerDB):
         if Checker.CanLStraight == True:
             PlayerDB.playerScore["L.Straight"] = 30
-            PlayerDB.Sum(PlayerDB, 30)
+            PlayerDB.Sum(30)
         else:
             PlayerDB.playerScore["L.Straight"] = 0
         Dice.rollChances = 0
@@ -566,7 +569,7 @@ class Score:
     def Yacht(PlayerDB):
         if Checker.CanYacht == True:
             PlayerDB.playerScore["Yacht"] = 50
-            PlayerDB.Sum(PlayerDB, 50)
+            PlayerDB.Sum(50)
         else:
             PlayerDB.playerScore["Yacht"] = 0
         Dice.rollChances = 0
@@ -602,7 +605,7 @@ Yacht : 동일한 주사위 눈이 5개일 때. 고정 50점.
         input(">> ")
         
     def CompareScore(player1, player2):
-            Scoreboard.ClearandPrintAllInterface(player1, player2)
+            Scoreboard.ClearandPrintAllInterface(player1, player2, playerNow)
             player1 = player1.total
             player2 = player2.total
             if player1 > player2:
@@ -643,7 +646,7 @@ while True:
     playerNow = player1
     # 타이틀 출력
     Init.Start()
-    for i in range(0, 2):
+    for i in range(0, 24):
         while PlayerAction.scored == False:
             if Dice.rollChances == 3:
                 # 주사위 최초 굴림
@@ -651,23 +654,28 @@ while True:
                 Checker.End()
                 Checker.All()
             else:
+                #주사위 재굴림
                 Dice.Reroll()
                 Checker.End()
                 Checker.All()
             # 사용자 인풋 대기
             PlayerAction.UserInput(playerNow, player1, player2)
-        Scoreboard.ClearandPrintAllInterface(player1, player2)
-        Dice.PrintDiceInterface()
+        #턴종료
+        Scoreboard.ClearandPrintAllInterface(player1, player2, playerNow)
         PlayerAction.EndTurn()
+        input("Press Enter to continue...")
+        #플레이어 변경
         if playerNow == player1:
             playerNow = player2
         else:
             playerNow = player1
         PlayerAction.scored = False
+    #점수 비교    
     Main.CompareScore(player1, player2)
     print("| Replay : r | | Exit : Anithing |")
-    rePlay = input(">> ")
-    if rePlay == "r" or "R":
+    #리플레이
+    replay = input(">> ")
+    if replay == "r":
         continue
     else:
         break
