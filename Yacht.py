@@ -4,7 +4,7 @@ from time import sleep
 
 isGameplay = True
 
-#Iniciallize game
+#게임 타이틀 화면
 class Init:
     def Start() -> None:
         while isGameplay == True:
