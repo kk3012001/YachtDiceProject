@@ -73,7 +73,7 @@ class Dice :
     dicerow3 = []
     
     def Init():
-        Dice.rollChances = 3
+        Dice.rollChances = 9999
         Dice.diceDot.clear()
         Dice.rolledDice.clear()
         Dice.rerollList = [1, 1, 1, 1, 1]
@@ -380,24 +380,20 @@ class Checker:
     triple = False
     
     def Fullhouse():
-        tempTriple = []
-        for i in range(1,7):
-            
+        for i in range(1, 7):
             if Dice.rolledDice.count(i) == 3:
                 Checker.triple = True
-                tempTriple.append(i)
+                break
             else:
-                Checker.triple = False
-                
+                Checker.triple = False       
         if Checker.triple == True:
-            for j in (1, 7):
-                if j not in tempTriple:
-                    if Dice.rolledDice.count(j) == 2:
-                        Checker.CanFullhouse = True
-                        Checker.triple = False
-                        break
-                    else:
-                        Checker.CanFullhouse = False
+            for j in range(1, 7):
+                if Dice.rolledDice.count(j) == 2:
+                    Checker.CanFullhouse = True
+                    Checker.triple = False
+                    break
+                else:
+                    Checker.CanFullhouse = False
         
     
     def FourofaKind():
